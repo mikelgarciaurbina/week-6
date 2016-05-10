@@ -1,0 +1,7 @@
+<h1><%= @tournament.name %></h1>
+
+<ul>
+	<% @tournament.players.each do |player| %>
+		<li><%= player.name %></li>
+	<% end %>
+</ul>

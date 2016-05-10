@@ -1,0 +1,43 @@
+<div class="clearfix">
+  <h1 class="pull-left">Tournaments</h1>
+
+  <button class="btn btn-primary pull-left heading-button hidden"
+      data-hook="tourney-add">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add a tournament
+  </button>
+</div>
+
+<%= form_tag({}, { :class => "tourney-form hidden", "data-hook" => "tourney-form" }) do %>
+  <div class="form-group">
+    <label for="tournament_name">Tournament name:</label>
+    <input type="text" name="tournament[name]" id="tournament_name"
+      class="form-control">
+  </div>
+
+  <div data-hook="form-alerts"></div>
+
+  <button type="submit" class="btn btn-success">
+    Save tournament
+  </button>
+<% end %>
+
+<%= form_tag({}, { :class => "tourney-form hidden", "data-hook" => "player-form" }) do %>
+  <div class="form-group">
+    <label for="player_name">Player name:</label>
+    <select id="player-name" name="player[id]">
+      <% @players.each do |player| %>
+        <option value="<%= player.id %>"><%= player.name %></option>
+      <% end %>
+    </select>
+    <input class="js-change-id" type="number" name="player[tournament]" hidden></input>
+  </div>
+
+  <div data-hook="form-alerts"></div>
+
+  <button type="submit" class="btn btn-success">
+    Add player to tournament
+  </button>
+<% end %>
+
+<section class="js-tourney-section"></section>
