@@ -1,0 +1,12 @@
+<form action="/" method="post">
+	<input type="hidden" name="authenticity_token" value="or954jKEmRn3nUeAufYg5pG7KuFTnin/FvdrSRSSLHpBlKeiWALULG0FFHuBr2zUK/K7sd8s277UhiHWNEh7LQ==">
+	<label for="email">Email</label>
+	<input type="email" name="user[email]" id="email">
+
+	<label for="password">Password</label>
+	<input type="password" name="user[password]" id="password">
+
+	<button type="submit">Login</button>
+</form>
+
+<%= link_to "Register", users_new_path %>

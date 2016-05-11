@@ -1,0 +1,16 @@
+<h1>Add a new product</h1>
+<%= form_for [@user, @product] do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+
+	<%= f.label :description %>
+	<%= f.text_area :description %>
+
+	<%= f.label :deadline %>
+	<%= f.date_field :deadline %>
+
+	<%= f.label :minimum_bid %>
+	<%= f.number_field :minimum_bid %>
+
+	<%= f.submit "Save" %>
+<% end %>

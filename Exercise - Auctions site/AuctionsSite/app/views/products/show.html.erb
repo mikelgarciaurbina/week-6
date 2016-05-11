@@ -1,0 +1,45 @@
+<h1>Title: <%= @product.title %></h1>
+<p>Description: <%= @product.description %></p>
+<p>Deadline: <%= @product.deadline %></p>
+<p>Minimum Bid: <%= @product.minimum_bid %>$</p>
+
+<ul>
+	<% @bids.each do |bid| %>
+		<li>
+			<div><%= bid.user.name %> - <%= bid.amount %>$</div>
+		</li>
+	<% end %>
+</ul>
+<% if @product.deadline > Time.now %>
+	<form action="/products/<%= @product.id %>/bids" method="post">
+		<input type="hidden" name="authenticity_token" value="or954jKEmRn3nUeAufYg5pG7KuFTnin/FvdrSRSSLHpBlKeiWALULG0FFHuBr2zUK/K7sd8s277UhiHWNEh7LQ==">
+		<label for="bid_email">Email</label>
+		<input type="email" name="bid[email]" id="bid_email">
+
+		<label for="bid_amount">Amount</label>
+		<input type="number" name="bid[amount]" id="bid_amount">
+
+		<button type="submit">Bid</button>
+	</form>
+<% else %>
+	<p>The winner is: <%= @product.show_winner %></p>
+	<% @product.reviews.each do |review| %>
+		<li>
+			<div><%= review.description %></div>
+		</li>
+	<% end %>
+	<% if user_signed_in? %>
+		<form action="/reviews" method="post">
+			<input type="hidden" name="authenticity_token" value="or954jKEmRn3nUeAufYg5pG7KuFTnin/FvdrSRSSLHpBlKeiWALULG0FFHuBr2zUK/K7sd8s277UhiHWNEh7LQ==">
+			<input type="hidden" name="review[user_id]" value="<%= @user.id %>">
+			<input type="hidden" name="review[product_id]" value="<%= @product.id %>">
+			<label for="review_description">Review Description</label>
+			<textarea name="review[description]" id="review_description"></textarea>
+
+			<button type="submit">Send</button>
+		</form>
+	<% end %>
+<% end %>
+
+<%= link_to "Products", user_products_path(@user.id) %>
+<%= link_to "Delete", user_products_destroy_path(@user.id, @product.id), method: :delete, confirm: 'Are you sure?' %>
