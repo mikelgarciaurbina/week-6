@@ -1,0 +1,27 @@
+<h1><%= @sandwich.name %></h1>
+<p><%= @sandwich.bread_type %></p>
+<p><%= @sandwich.total_calories %></p>
+
+<% @ingredients.each do |ingredient| %>
+  <button data-id="<%= ingredient.id %>"><%= ingredient.name %></button>
+<% end %>
+
+<script>
+  $("button").on("click", function(event){
+    event.preventDefault();
+    $.ajax({
+      url: "/api/sandwiches/<%= @sandwich.id %>/ingredients/add",
+      data: {
+        ingredient_id: $(this).data('id')
+      },
+      method: "post",
+      success: handleRecords,
+      error: function() {
+        console.log('MAL');
+      }
+    });
+  });
+  function handleRecords(result){
+    window.location = "/sandwiches/<%= @sandwich.id %>"
+  }
+</script>

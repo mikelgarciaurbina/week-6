@@ -30,14 +30,15 @@ class SandwichesController < ApplicationController
 	  render json: sandwich
 	end
 
-	def add
+	def add_ingredient
 	  sandwich = Sandwich.find_by(id: params[:id])
 	  unless sandwich
 	    render json: {error: "sandwich not found"},
 	    status: 404
 	    return
 	  end
-	  ingredient = sandwich.ingredients.create(ingredients_params)
+	  ingredient = Ingredient.find_by(id: params[:ingredient_id])
+	  sandwich.ingredients.push(ingredient)
 	  render json: ingredient
 	end
 
