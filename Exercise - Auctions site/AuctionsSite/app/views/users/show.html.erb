@@ -1,3 +1,11 @@
 <h1>User <%= @user.id %> description</h1>
 <p>Name: <%= @user.name %></p>
 <p>Email: <%= @user.email %></p>
+
+<p>Rating: <%= seller_reviews_average(@seller_reviews) %></p>
+
+<ul>
+  <% @seller_reviews.each do | seller_review | %>
+    <li><%= seller_review.author.name %> - <%= seller_review.review_content %></li>
+  <% end %>
+</ul>

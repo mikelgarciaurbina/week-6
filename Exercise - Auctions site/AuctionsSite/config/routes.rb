@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   post '/products/:product_id/bids', to: 'bids#create'
 
   resources :reviews, only: [:create, :edit, :update, :destroy]
+
+  get '/api/users/:user_id/seller_reviews', to: 'seller_reviews#show'
 end

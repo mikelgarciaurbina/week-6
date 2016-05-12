@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
+    @seller_reviews = SellerReview.where(subject_id: params[:id])
     unless @user
       render :no_users_found
     end
