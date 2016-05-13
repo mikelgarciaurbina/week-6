@@ -21,6 +21,10 @@
 
 		<button type="submit">Bid</button>
 	</form>
+	<form action="/products/<%= @product.id %>/buynow" method="post">
+		<input type="hidden" name="authenticity_token" value="or954jKEmRn3nUeAufYg5pG7KuFTnin/FvdrSRSSLHpBlKeiWALULG0FFHuBr2zUK/K7sd8s277UhiHWNEh7LQ==">
+		<button type="submit">Buy now</button>
+	</form>
 <% else %>
 	<p>The winner is: <%= @product.show_winner %></p>
 	<% @product.reviews.each do |review| %>

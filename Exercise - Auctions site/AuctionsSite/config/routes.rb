@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     to: 'products#destroy', as: :user_products_destroy
 
   post '/products/:product_id/bids', to: 'bids#create'
+  post '/products/:product_id/buynow', to: 'products#buynow'
 
   resources :reviews, only: [:create, :edit, :update, :destroy]
 
